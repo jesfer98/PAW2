@@ -102,6 +102,7 @@
         @if (Route::has('login'))
 
 @auth
+
 <a class="dropdown-item" href="{{ url('/perfil') }}">perfil</a>
 <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -156,11 +157,13 @@
 
               
               <img src="img/jaryuu.png" alt="Smiley face" height="60" width="60">
+
+ 
             
               <a class="text">
                                   <a class="text" >    {{ Auth::user()->nick}} </a>
-                              <!--    <a class="text" >    {{ Auth::user()->id}} </a>
-                                -->  
+                         
+                              
 
                               </a>
 

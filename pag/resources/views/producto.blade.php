@@ -59,12 +59,9 @@
 
 
                  <div class="form-group">
-                <label for="exampleFormControlFile1">poner imagen</label>
-                <input type="file" class="form-control-file" id="fileUpload" name=" file">
-
-
-              
-            </div>
+                  <label for="exampleFormControlFile1">poner imagen</label>
+                  <input type="file" class="form-control-file" id="fileUpload" name=" file">
+                </div>
 
 
 

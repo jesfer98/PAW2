@@ -6,14 +6,141 @@
 <br>
 
 
+
+          
+                @foreach($users as $row)
+
+                @if($row->id ==Auth::user()->id )
+  
+
+            @if(count($errors) > 0)
+
+            <div class="alert alert-danger">
+                  <ul>
+                  @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                  @endforeach
+                  </ul>
+            @endif
+
+
+      <div style="padding-left: 100px; padding-right: 100px;">
+     
+         <form method="post" action="{{url('Uudp/$row->id')}}">
+          @csrf
+          <!-- <input type="hidden" name="_method" value="PATCH" />-->
+            <input type="hidden" name="id" value={{Auth::user()->id}} />
+           
+                
+
+            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"  value="{{$row->name}}" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ __('apellido') }}</label>
+                                <div class="col-md-6">
+                                    <input id="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{$row->apellido}}" required >
+                                    @error('apellido')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="nick" class="col-md-4 col-form-label text-md-right">{{ __('nickname') }}</label>
+                                <div class="col-md-6">
+                                    <input id="nick" type="text" class="form-control @error('nick') is-invalid @enderror" name="nick"value="{{$row->nick}}" required >
+                                    @error('nick')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                        </div>
+                 
+
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$row->email}}" required autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('telefono') }}</label>
+                                <div class="col-md-6">
+                                    <input id="phone" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{$row->telefono}}" >
+                                    @error('telefono')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <label for="direccion" class="col-md-4 col-form-label text-md-right">{{ __('direccion') }}</label>
+                                <div class="col-md-6">
+                                    <input id="direccion" type="text" class="form-control @error('direccion') is-invalid @enderror" name="direccion" value="{{$row->direccion}}" >
+                                    @error('direccion')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                        </div>
+
+
+
+
+                <div> 
+                  <input type="hidden" id="custId" name="IdPr" value={{Auth::user()->id}} >
+                </div>
+                <div class="form-group">
+              <input type="submit" class="btn btn-primary" value="Edit" />
+            </div>
+           
+
+        </form>
+
+    </diV>
+
 <div style="padding-left: 100px; padding-right: 100px;">
      
-      <img src="img/darkside2.jpg" class="d-block w-100" alt="...">
+      <img src={{Auth::user()->imgUs}} class="d-block w-100" alt="...">
+      {{Auth::user()->imgUs}}
       <br>
-      <input class="form-control mr-sm-2" type="search" placeholder="direccion imagen" aria-label="Search">
-      <button type="button" class="btn btn-secondary"> modificar</button>
+            <form method="POST" action="{{route('subir')}}" accept-charset="UTF-8" enctype="multipart/form-data">
+                  {{ csrf_field() }}
+                  <label for="archivo"><b>Archivo: </b></label><br>
+                  <input type="file" name="file" required>
+                  <input class="btn btn-success" type="submit" value="Enviar" >
+             </form>
       
-        <br>
+       <br>
       
 </div>
 
@@ -68,17 +195,59 @@
     </div>
   </div>
 
-  <div class="form-group col-md-4" id="cate">
+  <div class="form-group col-md-4" id="cate" onchange="change()">
    
     <select id="inputState" class="form-control">
       <option selected>elige categoria:</option>
       <option value="1">modelo</option>
-      <option value="2">video</option>
-      <option value="3">animacion</option>
+      <option value="2">animacion</option>
+      <option value="3">video</option>
       <option value="4">otras</option>
     </select>
 
   </div>
+
+          <script> function change() {
+                var selectBox = document.getElementById("inputState");
+                var selected = selectBox.options[selectBox.selectedIndex].value;
+                
+
+                if(selected == '1'){
+
+                  $('.a1').show();
+                    $('.a4').hide();
+                    $('.a2').hide();
+                    $('.a3').hide();
+                  
+                }
+                else if(selected === '2'){
+                  $(".a2").show();
+                  $(".a1").hide();
+                  $(".a3").hide();
+                  $(".a4").hide();
+                }
+                else if(selected === '3'){
+                  $('.a3').show();
+                    $('.a4').hide();
+                    $('.a2').hide();
+                    $('.a1').hide();
+                }
+                else if(selected === '4'){
+                
+                  $('.a4').show();
+                    $('.a1').hide();
+                    $('.a2').hide();
+                    $('.a3').hide();
+                }
+                else {
+                  
+                $('.a4').hide();
+                    $('.a1').hide();
+                    $('.a2').hide();
+                    $('.a3').hide();
+                }
+          }</script>
+
 
 
 <div>
@@ -86,45 +255,94 @@
 </div>
 
 
-
+@foreach($contenidos as $row2)
+@if($row2->usuario ==Auth::user()->id)
 <br>
-
-    <div class="row">
-        <div class="col-md-auto">
+<div class="a{{$row2->categoria}}">
+    <div class="row" id="a{{$row2->categoria}}">
+          <div class="col-md-auto">
             <div>
                 <img src="img/rojo.jpg" alt="..." class="img-thumbnail">
             </div>
-        </div>
+         </div>
 
         <div class="col">
-<br>            
-<p>  descripcion</p>
+      <br>            
+      <p>  {{$row2->descripcion}}</p>
         </div>
-<br>
-<div style="border-top-width: 15px; padding-top:20px; ">
-        <div class="col col-lg-2" align="center">
-           <p>categoria  </p>
-        </div>
-        <div class="col col-lg-2" align="center">
-           <p>nombre</p>           
-        </div>
+      <br>
+        <div style="border-top-width: 15px; padding-top:20px; ">
+            <div class="col col-lg-2" align="center">
+              <p>{{$row2->nombreC}}  </p>
+            </div>
+            <div class="col col-lg-2" align="center">
+              <p>{{$row2->nombre}}</p>           
+            </div>
+            <div class="col col-lg-2" align="center">
+              
+            @if($row2->estado==0)
+            <p>estado: privado</p>           
+            @endif
+
+            @if($row2->estado==1)
+            <p>estado: publicado</p>           
+            @endif
+
+            @if($row2->estado==2)
+            <p>estado: eliminado</p>           
+            @endif   
+            
+
+            </div>
         
         </div>           
 
- <div class="btn-group-vertical">
-                <button type="button" class="btn btn-success" onclick="location.href='{{ url('/producto') }}'">modificar</button>
+          <div class="btn-group-vertical">
 
-                <button type="button" class="btn btn-primary">publicar</button>
-                
-                <button type="button" class="btn btn-danger">eliminar</button>
+          <form method="post" action="{{url('EdiA')}}">
+                          @csrf
+                          <input type="hidden" id="custId" name="custId" value={{$row2->idcontenido}} >
+                        
+                          <button type="submit"  class="btn btn-success" >modificar</button>
 
-            </div>
-
-            <br>
-    </div>
-
+                         
+                      </form>
 
 
+
+
+                     @if($row2->estado!=1)
+                     <form method="post" action="{{url('PubA')}}">
+                          @csrf
+                          <input type="hidden" id="custId" name="custId" value={{$row2->idcontenido}} >
+                        
+                          <button type="submit" class="btn btn-primary">publicar</button>
+
+                         
+                      </form>
+                     @endif
+                     
+                     @if($row2->estado!=2)
+
+                     <form method="post" action="{{url('BorA')}}">
+                          @csrf
+                          <input type="hidden" id="custId" name="custId" value={{$row2->idcontenido}} >
+                         
+                          <button type="submit" class="btn btn-danger">eliminar</button>
+
+                         
+                      </form>
+                      
+                    @endif
+                  </div>
+
+                  
+          </div>
+  </div>
+<br>
+@endif
+
+@endforeach
 
 <script>
 var x, i, j, selElmnt, a, b, c;
@@ -202,6 +420,8 @@ document.addEventListener("click", closeAllSelect);
 </script>
 
 
+@endif
+   @endforeach
 <br>
 
 </div>

@@ -8,7 +8,7 @@
 
 
 
-<div style="padding-left: 100px; padding-right: 100px;">
+    <div style="padding-left: 100px; padding-right: 100px;">
      
      <img src="img/darkside2.jpg" class="d-block w-100" alt="...">
      <br>                         
@@ -46,32 +46,41 @@
      </div>
 
      <br>
- </div>
+    </div>
 
 
  <div id="articulo" style="padding-left: 100px;">
-     <div class="row">
-         <div class="col col-lg-2">
-             <div>
-                 <img src="img/rojo.jpg" alt="..." class="img-thumbnail">
-             </div>
-         </div>
-
-         <div class=" col">
-             descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion
-         </div>
-         <div class="col  col-lg-2">
-      
-             <div class="btn-group-vertical">
-
-                 <button type="button" class="btn btn-secondary" onclick="location.href='{{ url('/archivo') }}'">detalles</button>
-
-
-             </div>
-         </div>
-     </div>
+        
 
 
 
+        @foreach ($contenido as $rows)             
+        
+        
+            <div class="row">
+                <div class="col col-lg-2">
+                    <div>
+                        <img src="img/rojo.jpg" alt="..." class="img-thumbnail">
+                    </div>
+                </div>
+
+                <div class=" col">
+                {{$rows->nombre}}  {{$rows->descripcion}} 
+
+                </div>
+                <div class="col  col-lg-2">
+            
+                    <div class="btn-group-vertical">
+
+                        <button type="button" class="btn btn-secondary" onclick="location.href='{{ url('/archivo') }}'">detalles</button>
+
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            @endforeach
+        
+     
 @endsection
 

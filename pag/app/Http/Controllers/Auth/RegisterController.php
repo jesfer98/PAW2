@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
 
 class RegisterController extends Controller
 {
@@ -63,7 +65,7 @@ class RegisterController extends Controller
                 'regex:/[0-9]/',      // must contain at least one digit
             ],
            'telefono' => ['nullable','numeric', 'min:11'],
-           'nick' => ['nullable', 'string', 'max:255'],
+           'direccion' => ['nullable', 'string', 'max:255'],
           
         ]);
     }
@@ -75,7 +77,9 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
+    { 
+
+
         return User::create([
             'name' => $data['name'],
             'apellido' => $data['apellido'],
@@ -84,6 +88,10 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'telefono' => $data['telefono'],
             'direccion' => $data['direccion'],
+
           ]);
+
+       
+          
     }
 }
