@@ -64,7 +64,25 @@ Route::get('/welcome', 'WelcomeController@index')->name('welcome');
 
 Route::get('/producto', 'ContController@index')->name('prd');
 
+Route::post('shArch', 'ContController@archivos')->name('arch');
+
+Route::post('megusta', 'ContController@VotacionPositiva')->name('MP');
+
+Route::post('nogusta', 'ContController@VotacionNegativa')->name('NP');
+
+
+Route::post('buscador', 'ContController@busca');
+
+Route::post('nogC', 'ContController@VoNegC')->name('NC');
+
+
+Route::post('nogV', 'ContController@VoPosC');
+
+Route::post('comentario', 'ContController@comentario')->name('CM');
+
 Route::post('Cant', 'ContController@most');
+
+Route::post('Can2', 'ContController@most2');
 
 //Route::resource('Cont', 'ContController');
 
@@ -78,9 +96,21 @@ Route::post('EdiA', 'ContController@paraed');
 Route::post('modA', 'ContController@modificarArt');
 
 
+Route::post('neoC', 'mensajeController@neoCh');
+
+Route::post('neoM', 'mensajeController@neoMj');
+
+Route::post('MJN', 'mensajeController@mensPR');
+
+
 Route::get('/editorProd',function () {
     return view('editorProd');
 });
+
+
+Route::post('shMo', 'mensajeController@shoM');
+
+
 
 //Route::resource('student','StudentController');
 

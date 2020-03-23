@@ -4,14 +4,11 @@
 
 @section("content")
 
+@foreach($contenido as $rows)
+
+
+
 <br>
-
-
-
-
-
-  
-
         <div id="articulo">
             <div class="row">
                 <div class="col col-lg-2">
@@ -21,14 +18,27 @@
                 </div>
 
                 <div class=" col">
-                    descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion descripcion
+                {{$rows->nombre}}
+                <br>
+              {{$rows->categoria}}
+                <br>
+                {{$rows->descripcion}}
+                <br>
+                <button type="button" class="btn btn-success" >gusta {{$rows->val_pos}}</button>
+                <button type="button" class="btn btn-danger" >no gusta {{$rows->val_neg}}</button>
+
                 </div>
                 <div class="col  col-lg-2">
              
                     <div class="btn-group-vertical">
 
-                        <button type="button" class="btn btn-secondary" onclick="location.href='{{ url('/archivo') }}'">detalles</button>
-
+                    <form action="{{url('shArch')}}" method="post">
+                             
+                             @csrf
+                                      <input type="hidden" id="custId" name="idprd" value={{$rows->id}} >
+         
+                                      <button type="submit" class="btn btn-secondary" onclick="">detalles</button>
+                                 </form>
 
                     </div>
                 </div>
@@ -36,6 +46,7 @@
 
         </div>
 
+@endforeach
 @endsection
 
 

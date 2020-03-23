@@ -26,15 +26,35 @@ class userController extends Controller
 
         $users = DB::table('users')->get();
 
-        $contenidos= DB::table('contenidos')->get();
+     //   $contenidos= DB::table('contenidos')->get();
 
         $contenidos = DB::table('contenidos')
             ->join('categoria', 'categoria.idcategoria', '=', 'contenidos.categoria')
             ->select('contenidos.*', 'categoria.nombreC')
             ->get();
 
+            $mensaje = DB::table('mensajes')
+            ->join('chat as c',  'mensajes.idchat','=','c.idchat')
+            ->join('users as u1','u1.id','=','c.usuario1')
+            ->join('users as u2','u2.id','=','c.usuario2')
+      //      ->where([['chat.usuario1', '=', $request->get('custId')],['chat.usuario2', '=', $request->get('autid')]])
+      //      ->orWhere( [['chat.usuario2', '=', $request->get('custId')],['chat.usuario1', '=', $request->get('autid')]])
+            ->select('mensajes.texto','mensajes.idmensaje as id','mensajes.idchat','mensajes.id_env','u1.id as u1id','u1.name as u1nombre','u1.apellido as u1apellido' ,'u2.id as u2id','u2.name as  u2nombre','u2.apellido as u2apellido')
+            ->get();
 
-        return view('/perfil', ['users' => $users,'contenidos'=>$contenidos]);
+
+        
+ 
+
+            $chat=DB::table('chat')
+            ->join('users as u1','u1.id','=','chat.usuario1')
+            ->join('users as u2','u2.id','=','chat.usuario2')
+            ->select('chat.idchat','u1.id as u1id','u1.nick as u1nick','u2.id as u2id','u2.nick as  u2nick')
+            ->get();
+
+
+
+        return view('/perfil', ['users' => $users,'contenidos'=>$contenidos,'chat'=>$chat,'mensaje'=>$mensaje]);
         
 
 

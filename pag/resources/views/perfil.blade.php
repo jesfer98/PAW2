@@ -24,6 +24,11 @@
             @endif
 
 
+
+
+          
+
+
       <div style="padding-left: 100px; padding-right: 100px;">
      
          <form method="post" action="{{url('Uudp/$row->id')}}">
@@ -149,108 +154,178 @@
 <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
 
 
-<div style="padding-left: 20px; padding-right: 20px;">
-  <div class="row" style="padding-top: 20px;padding-bottom: 20px;">
-    <div class="col-3">
-      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">comentario persona1</a>
-        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">comentario persona4</a>
-        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">comentario persona3</a>
-        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">comentario persona2</a>
-      </div>
-    </div>
-    <div class="col-9">
-      <div class="tab-content" id="v-pills-tabContent">
-        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-          <div class="card border-primary mb-3" >
-            <div class="card-header">mio</div>
-            <div class="card-body text-primary">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <p class="card-text"><small class="text-muted">21/02/2020-10:50</small></p>
-            </div>      
-          </div>
-          
-          <div class="card border-success mb-3" >
-            <div class="card-header">otra persona</div>
-            <div class="card-body text-success">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <p class="card-text"><small class="text-muted">21/02/2020-10:50</small></p>
-            </div>
-          </div>
-       
-          <div>
-            <input class="form-control mr-sm-2" type="search" placeholder="mensaje" aria-label="Search">
-            
-            
-    
-            <button type="button" class="btn btn-primary" onclick="">enviar</button>
 
-          </div>
+
+ 
+<div>
+
+  <div class="row">
+                        <div class="col-3">
+                          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+@foreach($chat as $RC)
+     @if($RC->u1id==Auth::user()->id||$RC->u2id==Auth::user()->id)
+                      @if($RC->u1id==Auth::user()->id)
+                                <a class="nav-link" id="v-{{$RC->idchat}}-tab" data-toggle="pill" href="#v-{{$RC->idchat}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{$RC->u2nick}}</a>
+                      @else
+                                <a class="nav-link" id="v-{{$RC->idchat}}-tab" data-toggle="pill" href="#v-{{$RC->idchat}}" role="tab" aria-controls="v-pills-home" aria-selected="true">{{$RC->u1nick}}</a>
+                      @endif
+     @endif
+@endforeach
+                          </div>
+                        </div>
+      <div class="col-9">
+        <div class="tab-content" id="v-pills-tabContent">
+     @foreach($chat as $RC)
+            
+
+
+                 
+                    <div class="tab-pane fade show" id="v-{{$RC->idchat}}" role="tabpanel" aria-labelledby="v-{{$RC->idchat}}-tab">
+                    @foreach($mensaje as $MS)
+                      @if($MS->idchat==$RC->idchat)
+                              @if($MS->id_env!=Auth::user()->id)
+                                <div class="card border-primary mb-3" >
+                                    @if($MS->id_env!=$MS->u1id)
+                                  <div class="card-header">{{$MS->u1nombre}} {{$MS->u1apellido}}</div>
+                                    @else
+                                    <div class="card-header">{{$MS->u2nombre}} {{$MS->u2apellido}}</div>
+                                    @endif
+                                  <div class="card-body text-primary">
+                                    <p class="card-text">{{$MS->texto}}</p>
+                                    
+                                  </div>      
+                                </div>
+
+
+                            @else
+                                <div class="card border-success mb-3" >
+                                @if($MS->id_env!=$MS->u1id)
+                                  <div class="card-header">{{$MS->u1nombre}} {{$MS->u1apellido}}</div>
+                                    @else
+                                    <div class="card-header">{{$MS->u2nombre}} {{$MS->u2apellido}}</div>
+                                    @endif
+                                  <div class="card-body text-primary">
+                                    <p class="card-text">{{$MS->texto}}</p>
+                                    
+                                  </div>      
+                                </div>
+                              
+                              @endif    
+                          @endif              
+                      @endforeach
+                      <form action="{{url('MJN')}}" method="post">
+                             @csrf
+                      <div>
+                      <input type="hidden" id="custId" name="idAut" value={{Auth::user()->id}} >
+                        <input class="form-control mr-sm-2" type="search" placeholder="mensaje"  name="texto"aria-label="Search">
+                        <input type="hidden" id="custId" name="chat" value={{$RC->idchat}} >
+                        
+                
+                        <button type="submit" class="btn btn-primary" onclick="">enviar</button>
+
+                      </div>
+                      </form>
+                    </div>
+                   
+         
+  
+            @endforeach
+            <br> 
+           
+
+     
+
+         
+       
+       
        
         </div>
-        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">perro</div>
-        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">gato</div>
-        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">mas</div>
       </div>
     </div>
-  </div>
 
-  <div class="form-group col-md-4" id="cate" onchange="change()">
+</div>
+
+
+
+
+
+
+
+
+    
+
+
+<!----------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------->
+<br>
+
+ <div class="form-group col-md-4" id="cate" onchange="change()">
    
-    <select id="inputState" class="form-control">
-      <option selected>elige categoria:</option>
-      <option value="1">modelo</option>
-      <option value="2">animacion</option>
-      <option value="3">video</option>
-      <option value="4">otras</option>
-    </select>
+            <select id="inputState" class="form-control">
+              <option selected>elige categoria:</option>
+              <option value="1">modelo</option>
+              <option value="2">animacion</option>
+              <option value="3">video</option>
+              <option value="4">otras</option>
+            </select>
 
-  </div>
+ </div>
 
-          <script> function change() {
-                var selectBox = document.getElementById("inputState");
-                var selected = selectBox.options[selectBox.selectedIndex].value;
-                
+         <script> function change() {
+               var selectBox = document.getElementById("inputState");
+               var selected = selectBox.options[selectBox.selectedIndex].value;
+               
 
-                if(selected == '1'){
+               if(selected == '1'){
 
-                  $('.a1').show();
-                    $('.a4').hide();
-                    $('.a2').hide();
-                    $('.a3').hide();
-                  
-                }
-                else if(selected === '2'){
-                  $(".a2").show();
-                  $(".a1").hide();
-                  $(".a3").hide();
-                  $(".a4").hide();
-                }
-                else if(selected === '3'){
-                  $('.a3').show();
-                    $('.a4').hide();
-                    $('.a2').hide();
-                    $('.a1').hide();
-                }
-                else if(selected === '4'){
-                
-                  $('.a4').show();
-                    $('.a1').hide();
-                    $('.a2').hide();
-                    $('.a3').hide();
-                }
-                else {
-                  
-                $('.a4').hide();
-                    $('.a1').hide();
-                    $('.a2').hide();
-                    $('.a3').hide();
-                }
-          }</script>
+                 $('.a1').show();
+                   $('.a4').hide();
+                   $('.a2').hide();
+                   $('.a3').hide();
+                 
+               }
+               else if(selected === '2'){
+                 $(".a2").show();
+                 $(".a1").hide();
+                 $(".a3").hide();
+                 $(".a4").hide();
+               }
+               else if(selected === '3'){
+                 $('.a3').show();
+                   $('.a4').hide();
+                   $('.a2').hide();
+                   $('.a1').hide();
+               }
+               else if(selected === '4'){
+               
+                 $('.a4').show();
+                   $('.a1').hide();
+                   $('.a2').hide();
+                   $('.a3').hide();
+               }
+               else {
+                 
+               $('.a4').hide();
+                   $('.a1').hide();
+                   $('.a2').hide();
+                   $('.a3').hide();
+               }
+         }</script>
 
 
 
-<div>
+
+
+
+
+
+  <div>
             <button type="button" class="btn btn-success" id="agrega"  onclick="location.href='{{ url('/producto') }}'" >agregar archivo </button>
 </div>
 

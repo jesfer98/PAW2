@@ -137,9 +137,19 @@
         <a class="nav-link" href="{{ url('/usuarios') }}">usuarios</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button type="button" class="btn btn-success"  onclick="location.href='{{ url('/buscador') }}'">buscar</button>
+    <form class="form-inline my-2 my-lg-0" method="post" action="{{url('buscador')}}">
+    @csrf
+        @if (Route::has('login'))
+
+                @auth
+                <input type="hidden" id="custId" name="custId" value={{ Auth::user()->id}} >
+                @else
+                <input type="hidden" id="custId" name="custId" value=0 >
+                @endauth
+
+        @endif
+      <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+      <button type="submit" class="btn btn-success">buscar</button>
       
 
      

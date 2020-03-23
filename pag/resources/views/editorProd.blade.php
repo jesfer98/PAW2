@@ -25,7 +25,7 @@
                                 </div>
                     @endif
 
-                <form name="log"  method="post" action="{{url('modA')}}">
+         <form name="log"  method="post" action="{{url('modA')}}">
                 
                 {{csrf_field()}}
                     <div class="row">
@@ -40,8 +40,8 @@
                                         <select id="inputState" class="form-control" name="categoria" value="{{$rows->categoria}}">
                                         <option selected>elige categoria:</option>
                                         <option value="1">modelo</option>
-                                        <option value="2">video</option>
-                                        <option value="3">animacion</option>
+                                        <option value="2">animacion</option>
+                                        <option value="3">video</option>
                                         <option value="4">otras</option>
                                         </select>
                                     </div>
@@ -82,7 +82,7 @@
                 </div>
             
 
-                </form>
+    </form>
 
                 
 
