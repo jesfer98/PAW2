@@ -32,7 +32,7 @@ CREATE TABLE `mensajes` (
   KEY `idchat_idx` (`idchat`),
   CONSTRAINT `id_env` FOREIGN KEY (`id_env`) REFERENCES `users` (`id`),
   CONSTRAINT `idchat` FOREIGN KEY (`idchat`) REFERENCES `chat` (`idchat`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `mensajes` (
 
 LOCK TABLES `mensajes` WRITE;
 /*!40000 ALTER TABLE `mensajes` DISABLE KEYS */;
+INSERT INTO `mensajes` VALUES (1,'otros',1,5),(2,'respuesta',1,1),(19,'preuva2',24,5),(20,'preuva2',24,5),(21,'va de nuez',1,5),(22,'la ultima',1,5),(23,'ahora si',1,5);
 /*!40000 ALTER TABLE `mensajes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-20 12:48:12
+-- Dump completed on 2020-03-24 11:15:38

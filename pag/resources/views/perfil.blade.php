@@ -135,13 +135,16 @@
 
 <div style="padding-left: 100px; padding-right: 100px;">
      
-      <img src={{Auth::user()->imgUs}} class="d-block w-100" alt="...">
-      {{Auth::user()->imgUs}}
+      <img src="images/{{ Auth::user()->imgPrt}}" class="d-block w-100" alt="..."  height="600" width="1000">
+      
       <br>
             <form method="POST" action="{{route('subir')}}" accept-charset="UTF-8" enctype="multipart/form-data">
                   {{ csrf_field() }}
-                  <label for="archivo"><b>Archivo: </b></label><br>
-                  <input type="file" name="file" required>
+                  <input type="hidden" name="id" value={{Auth::user()->id}} />
+                  <label for="archivo"><b>imagen usuario: </b></label><br>
+                  <input type="file" name="file1" ><br>
+                  <label for="archivo"><b>imagen perfil: </b></label><br>
+                  <input type="file" name="file2" ><br>
                   <input class="btn btn-success" type="submit" value="Enviar" >
              </form>
       
@@ -328,94 +331,104 @@
   <div>
             <button type="button" class="btn btn-success" id="agrega"  onclick="location.href='{{ url('/producto') }}'" >agregar archivo </button>
 </div>
-
+<?php $ant = 0; ?>
 
 @foreach($contenidos as $row2)
-@if($row2->usuario ==Auth::user()->id)
-<br>
-<div class="a{{$row2->categoria}}">
-    <div class="row" id="a{{$row2->categoria}}">
-          <div class="col-md-auto">
-            <div>
-                <img src="img/rojo.jpg" alt="..." class="img-thumbnail">
-            </div>
-         </div>
-
-        <div class="col">
-      <br>            
-      <p>  {{$row2->descripcion}}</p>
-        </div>
-      <br>
-        <div style="border-top-width: 15px; padding-top:20px; ">
-            <div class="col col-lg-2" align="center">
-              <p>{{$row2->nombreC}}  </p>
-            </div>
-            <div class="col col-lg-2" align="center">
-              <p>{{$row2->nombre}}</p>           
-            </div>
-            <div class="col col-lg-2" align="center">
-              
-            @if($row2->estado==0)
-            <p>estado: privado</p>           
-            @endif
-
-            @if($row2->estado==1)
-            <p>estado: publicado</p>           
-            @endif
-
-            @if($row2->estado==2)
-            <p>estado: eliminado</p>           
-            @endif   
-            
-
-            </div>
-        
-        </div>           
-
-          <div class="btn-group-vertical">
-
-          <form method="post" action="{{url('EdiA')}}">
-                          @csrf
-                          <input type="hidden" id="custId" name="custId" value={{$row2->idcontenido}} >
-                        
-                          <button type="submit"  class="btn btn-success" >modificar</button>
-
-                         
-                      </form>
-
-
-
-
-                     @if($row2->estado!=1)
-                     <form method="post" action="{{url('PubA')}}">
-                          @csrf
-                          <input type="hidden" id="custId" name="custId" value={{$row2->idcontenido}} >
-                        
-                          <button type="submit" class="btn btn-primary">publicar</button>
-
-                         
-                      </form>
-                     @endif
-                     
-                     @if($row2->estado!=2)
-
-                     <form method="post" action="{{url('BorA')}}">
-                          @csrf
-                          <input type="hidden" id="custId" name="custId" value={{$row2->idcontenido}} >
-                         
-                          <button type="submit" class="btn btn-danger">eliminar</button>
-
-                         
-                      </form>
-                      
-                    @endif
-                  </div>
+  @if($row2->usuario ==Auth::user()->id)
+    @if($row2->id<>$ant)
+    <br>
+    <div class="a{{$row2->categoria}}" style="padding: 35px">
+        <div class="row" id="a{{$row2->categoria}}">
+              <div class="col-md-auto">
+                <div>
 
                   
-          </div>
-  </div>
-<br>
-@endif
+                    @if( $row2->url<>null)
+                        <img src="images/{{$row2->url}}" alt="img/jaryuu.png" height="200" width="200">
+                    @else
+                        <img src="img/rojo.jpg" alt="..." height="200" width="200">
+                    @endif
+                
+                </div>
+            </div>
+
+            <div class="col">
+          <br>            
+          <p>  {{$row2->descripcion}}</p>
+            </div>
+          <br>
+            <div style="border-top-width: 15px; padding-top:20px; ">
+                <div class="col col-lg-2" align="center">
+                  <p>{{$row2->nombreC}}  </p>
+                </div>
+                <div class="col col-lg-2" align="center">
+                  <p>{{$row2->nombre}}</p>           
+                </div>
+                <div class="col col-lg-2" align="center">
+                  
+                @if($row2->estado==0)
+                <p>estado: privado</p>           
+                @endif
+
+                @if($row2->estado==1)
+                <p>estado: publicado</p>           
+                @endif
+
+                @if($row2->estado==2)
+                <p>estado: eliminado</p>           
+                @endif   
+                
+
+                </div>
+            
+            </div>           
+
+              <div class="btn-group-vertical">
+
+              <form method="post" action="{{url('EdiA')}}">
+                              @csrf
+                              <input type="hidden" id="custId" name="custId" value={{$row2->idcontenido}} >
+                            
+                              <button type="submit"  class="btn btn-success" >modificar</button>
+
+                            
+                          </form>
+
+
+
+
+                        @if($row2->estado!=1)
+                        <form method="post" action="{{url('PubA')}}">
+                              @csrf
+                              <input type="hidden" id="custId" name="custId" value={{$row2->idcontenido}} >
+                            
+                              <button type="submit" class="btn btn-primary">publicar</button>
+
+                            
+                          </form>
+                        @endif
+                        
+                        @if($row2->estado!=2)
+
+                        <form method="post" action="{{url('BorA')}}">
+                              @csrf
+                              <input type="hidden" id="custId" name="custId" value={{$row2->idcontenido}} >
+                            
+                              <button type="submit" class="btn btn-danger">eliminar</button>
+
+                            
+                          </form>
+                          
+                        @endif
+                      </div>
+
+                      
+              </div>
+      </div>
+    <br>
+    @endif
+    <?php $ant = $row2->idcontenido ?>
+  @endif
 
 @endforeach
 

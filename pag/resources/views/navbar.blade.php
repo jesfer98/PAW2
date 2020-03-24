@@ -165,9 +165,11 @@
           <nav class="navbar navbar-expand-sm navbar-custom bg-primary">
             
 
-              
-              <img src="img/jaryuu.png" alt="Smiley face" height="60" width="60">
-
+              @if( Auth::user()->imgUs<>null)
+              <img src="images/{{ Auth::user()->imgUs}}" alt="img/jaryuu.png" height="60" width="60">
+@else
+<img src="img/jaryuu.png" alt="img/jaryuu.png" height="60" width="60">
+@endif
  
             
               <a class="text">

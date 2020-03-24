@@ -66,7 +66,12 @@
                 <div class="row">
                     <div class="col col-lg-2">
                         <div>
-                            <img src="img/rojo.jpg" alt="..." class="img-thumbnail" style="width: 100px; height: 100px;" >
+                    @if($rows['imgUs']<>null)
+                        <img src="images/{{$rows['imgUs']}}" alt="..." class="img-thumbnail" height="500" width="500">
+                    @else
+                        <img src="img/rojo.jpg" alt="..." class="img-thumbnail"  height="500" width="500">
+                    @endif                        
+                        
                         </div>
                     </div>
     

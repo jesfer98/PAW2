@@ -28,14 +28,16 @@ class ContController extends Controller
         if($request->get('search')==null){
         $contenido = DB::table('contenidos')
         ->join('categoria', 'contenidos.categoria', '=', 'categoria.idcategoria')
-        ->select('contenidos.nombre as nombre', 'contenidos.descripcion as descripcion','contenidos.idcontenido as id','categoria.nombreC as categoria','contenidos.val_pos','contenidos.val_neg')
+        ->leftJoin('imagenc', 'contenidos.idcontenido', '=', 'imagenc.contenido')
+        ->select('contenidos.nombre as nombre', 'contenidos.descripcion as descripcion','contenidos.idcontenido as id','categoria.nombreC as categoria','contenidos.val_pos','contenidos.val_neg','imagenc.url')
         ->where('usuario', '<>', $request->get('custId'))
         ->where('estado', '1')
         ->get();
         }
         else{$contenido = DB::table('contenidos')
             ->join('categoria', 'contenidos.categoria', '=', 'categoria.idcategoria')
-            ->select('contenidos.nombre as nombre', 'contenidos.descripcion as descripcion','contenidos.idcontenido as id','categoria.nombreC as categoria','contenidos.val_pos','contenidos.val_neg')
+            ->leftJoin('imagenc', 'contenidos.idcontenido', '=', 'imagenc.contenido')
+            ->select('contenidos.nombre as nombre', 'contenidos.descripcion as descripcion','contenidos.idcontenido as id','categoria.nombreC as categoria','contenidos.val_pos','contenidos.val_neg','imagenc.url')
             ->where([['usuario', '<>', $request->get('custId')],['estado', '1'],['nombre', $request->get('search')]])
             ->orWhere([['usuario', '<>', $request->get('custId')],['estado', '1'],['descripcion', $request->get('search')]])
             ->orWhere([['usuario', '<>', $request->get('custId')],['estado', '1'],['categoria.nombre', $request->get('search')]])
@@ -106,7 +108,9 @@ class ContController extends Controller
        $contenido = DB::table('contenidos')->where('idcontenido', $request->get('custId'))->select('idcontenido as id', 'nombre','categoria','descripcion')->get();
        //return view('visita', compact('contenido'));
 
-       return view('editorProd', ['contenido' => $contenido]);
+       $imagen = DB::table('imagenc')->where('contenido', $request->get('custId'))->select('idimagenC as id', 'url')->get();
+
+       return view('editorProd', ['contenido' => $contenido,'imagen'=>$imagen]);
     }
 
     /**
@@ -132,17 +136,22 @@ class ContController extends Controller
             $this->validate( $request, [
                 'nombre'=>'required',
 
-                'descripcion'=>'nullable',
+                'desc'=>'nullable',
                 'categoria'=>['required','numeric'],
                 'usuario'=>'nullable',
                 'val_pos'=>'nullable',
                 'val_neg'=>'nullable',
                 'estado'=>'nullable'
             ]);
+
+            
+/////////////////////////////////////////////////////////////////
+
+
             $contenido = new Contenido([
                 'nombre'=> $request->get('nombre'),
                 
-                'descripcion'=>$request->get('descripcion'),
+                'descripcion'=>$request->get('desc'),
                 'categoria'=>$request->get('categoria'),
                 'usuario'=>$request->get('custId'),
                 'val_pos'=>$request->get('val_pos'),
@@ -152,6 +161,65 @@ class ContController extends Controller
             ]);
 
             $contenido->save();
+
+
+            ///////////////////////////////////////////////////////////////
+
+
+            $entrada=$request->all();
+
+            if($archivo=$request->file('file1')){
+    
+                    $nombre=$archivo->getClientOriginalName();
+                    $archivo->move('images',$nombre);
+                   
+
+                    $chat = DB::table('contenidos')->select('idcontenido')
+                    ->where([['nombre', '=',  $request->get('nombre')],['usuario', '=', $request->get('custId')]])
+                    ->get();
+            
+
+
+                 DB::table('imagenc')->insert(
+                   ['contenido' =>  $chat->get(0)->idcontenido, 'url' => $nombre]
+                   );
+            }
+            if($archivo=$request->file('file2')){
+    
+                $nombre=$archivo->getClientOriginalName();
+                $archivo->move('images',$nombre);
+               
+
+                $chat = DB::table('contenidos')->select('idcontenido')
+                ->where([['nombre', '=',  $request->get('nombre')],['usuario', '=', $request->get('custId')]])
+                ->get();
+        
+
+
+             DB::table('imagenc')->insert(
+               ['contenido' =>  $chat->get(0)->idcontenido, 'url' => $nombre]
+               );
+            }
+            if($archivo=$request->file('file3')){
+    
+                $nombre=$archivo->getClientOriginalName();
+                $archivo->move('images',$nombre);
+               
+
+                $chat = DB::table('contenidos')->select('idcontenido')
+                ->where([['nombre', '=',  $request->get('nombre')],['usuario', '=', $request->get('custId')]])
+                ->get();
+        
+
+
+             DB::table('imagenc')->insert(
+               ['contenido' =>  $chat->get(0)->idcontenido, 'url' => $nombre]
+               );
+            }
+
+       
+
+           
 
               
             return redirect()->route('prd')->with('success',
@@ -169,6 +237,7 @@ class ContController extends Controller
     
             DB::table('comentario')->where('idcomentario', $request->get('idcmt'))->increment('valPos');
         
+            
               return $this->archivos($request); 
           
     }
@@ -237,6 +306,85 @@ class ContController extends Controller
                                                 ]);
                 }
 
+
+
+
+          
+               $entrada=$request->all();
+
+                if($archivo=$request->file('file1')){
+
+                      
+
+                        $nombre=$archivo->getClientOriginalName();
+                        $archivo->move('images',$nombre);
+                    
+
+                        
+                        $contenido = DB::table('imagenc')
+                        ->where('idimagenC', $request->get('file1Id'))
+                        ->update(['url' => $nombre  ]);
+
+                    
+                }   elseif($archivo2=$request->file('file4')){
+                    $nombre=$archivo2->getClientOriginalName();
+                    $archivo2->move('images',$nombre);
+                
+                    DB::table('imagenc')->insert(
+                        ['contenido' =>  $request->get('custId'), 'url' => $nombre]
+                        );
+                                
+                }
+
+                if($archivo=$request->file('file2')){
+
+                      
+
+                    $nombre=$archivo->getClientOriginalName();
+                    $archivo->move('images',$nombre);
+                
+
+                    
+                    $contenido = DB::table('imagenc')
+                    ->where('idimagenC', $request->get('file2d'))
+                    ->update(['url' => $nombre  ]);
+
+                
+            }   elseif($archivo2=$request->file('file5')){
+                $nombre=$archivo2->getClientOriginalName();
+                $archivo2->move('images',$nombre);
+            
+                DB::table('imagenc')->insert(
+                    ['contenido' =>  $request->get('custId'), 'url' => $nombre]
+                    );
+                            
+            }
+            if($archivo=$request->file('file3')){
+
+                      
+
+                $nombre=$archivo->getClientOriginalName();
+                $archivo->move('images',$nombre);
+            
+
+                
+                $contenido = DB::table('imagenc')
+                ->where('idimagenC', $request->get('file3Id'))
+                ->update(['url' => $nombre  ]);
+
+            
+        }   elseif($archivo2=$request->file('file6')){
+            $nombre=$archivo2->getClientOriginalName();
+            $archivo2->move('images',$nombre);
+        
+            DB::table('imagenc')->insert(
+                ['contenido' =>  $request->get('custId'), 'url' => $nombre]
+                );
+                        
+        }
+
+
+           
        return redirect()->route('usu')->with('success','Data update');
 
 

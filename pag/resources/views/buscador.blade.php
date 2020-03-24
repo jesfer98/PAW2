@@ -3,17 +3,17 @@
 
 
 @section("content")
-
+<?php $ant = 0; ?>
 @foreach($contenido as $rows)
 
-
+@if($rows->id<>$ant)
 
 <br>
         <div id="articulo">
             <div class="row">
                 <div class="col col-lg-2">
                     <div>
-                        <img src="img/rojo.jpg" alt="..." class="img-thumbnail">
+                        <img src="images/{{$rows->url}}" alt="..." class="img-thumbnail" height="500" width="500">
                     </div>
                 </div>
 
@@ -45,7 +45,8 @@
             </div>
 
         </div>
-
+        <?php $ant = $rows->id ?>
+     @endif
 @endforeach
 @endsection
 

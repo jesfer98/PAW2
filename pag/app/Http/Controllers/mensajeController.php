@@ -82,7 +82,7 @@ class mensajeController extends Controller
 
     $user=   DB::table('users')->where('id', $request->get('custId'))->get();
 
-
+   // return redirect()->route('SM')->with(['contenido' => $contenido, 'mensaje'=>$mensaje,'user'=>$user,'chat'=>$chat]);
    return view('visita', ['contenido' => $contenido, 'mensaje'=>$mensaje,'user'=>$user,'chat'=>$chat]);
 
 

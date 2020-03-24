@@ -30,7 +30,9 @@ class userController extends Controller
 
         $contenidos = DB::table('contenidos')
             ->join('categoria', 'categoria.idcategoria', '=', 'contenidos.categoria')
-            ->select('contenidos.*', 'categoria.nombreC')
+            ->join('imagenC','imagenc.contenido','=','contenidos.idcontenido')
+            ->orderBy('contenidos.idcontenido', 'desc')
+            ->select('contenidos.*', 'categoria.nombreC','imagenc.url')
             ->get();
 
             $mensaje = DB::table('mensajes')
@@ -107,19 +109,40 @@ class userController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function stimg(Request $request)
     {
-        $post=Post::create($request->all());
-     
-        $rules = ['file' => 'mimes:jpg,jpeg,png'];
+        $entrada=$request->all();
 
-        $post->fill($request->all())->save();
- 
-                 if($request->file('file')){
-                     $path=Storage::disk('public')->put('image',$request->file('file'));
-                     $post->fill(['file'=> asset($path)])->save();    
-                 }
-                 return view('usu');
+        if($archivo=$request->file('file1')){
+
+                $nombre=$archivo->getClientOriginalName();
+                $archivo->move('images',$nombre);
+               
+                $affected = DB::table('users')
+              ->where('id',$request->get('id'))
+              ->update(['imgUs' => $nombre]);
+             // DB::table('imagenc')->insert(
+               //     ['contenido' => 1, 'url' => $nombre]
+               // );
+        }
+
+        if($archivo=$request->file('file2')){
+
+            $nombre=$archivo->getClientOriginalName();
+            $archivo->move('images',$nombre);
+           
+            $affected = DB::table('users')
+          ->where('id',$request->get('id'))
+          ->update(['imgPrt' => $nombre]);
+         // DB::table('imagenc')->insert(
+           //     ['contenido' => 1, 'url' => $nombre]
+           // );
+    }
+
+
+                
+  
+    return redirect()->route('usu');
     }
 
     /**

@@ -47,7 +47,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jes','fer','jesfer','jes@gmail.com','$2y$10$MrCsS6IyxaiFP9tZhAj6H.KoZXMfGIWzBSukCCuizu43ubMgSfZG2','2020-03-17 18:44:50','2020-03-17 18:44:50','810803453',NULL,NULL,NULL),(2,'a','b','c','d@gmail.com','$2y$10$VFAqqF.Y/whrfkWJYjrBXeVTdcM7E1PTcFDiSizQ5BosWrYeQXr4.','2020-03-17 21:49:14','2020-03-17 21:49:14',NULL,NULL,NULL,NULL),(3,'b','c','d','a@gmail.com','$2y$10$NXZm9RV6QdiEb8LBjX2mhuMN21CBKKvyR24B7CWxEzlOhM7rVTZ4W','2020-03-17 22:07:32','2020-03-17 22:07:32',NULL,NULL,NULL,NULL),(4,'c','d','s','r@gmail.com','$2y$10$kcOgDOZKD/fDPMos35GGl.KKRw.jSwvBvHpf7HBKdG3/J7bccm1/u','2020-03-17 22:21:59','2020-03-17 22:21:59',NULL,NULL,NULL,NULL),(5,'passas','passos','pass','pass@gmail.com','$2y$10$9r/JJ.5kvn4GkfZ8MgTvyuB8Z/j24gHdXixJxsb9FqaBSkaA9AOay','2020-03-17 22:37:19','2020-03-17 22:37:19','845','afds',NULL,NULL),(6,'abs','abs','abs','abs@gmail.com','$2y$10$vExdCdKg1QobeyF8SfYt1u8ZqT9Dcd1FPUdojEEc1skh9VsEK79di','2020-03-18 16:09:36','2020-03-18 16:09:36','86523','sadfa',NULL,NULL),(11,'a1','a1','a1','a1@gmail.com','$2y$10$TWbD2HekjeU46JkhFZp8J.iHbfvaofQD37BZdKDEIN6jA32hFGolO','2020-03-18 18:41:41','2020-03-18 18:41:41','5814263','asf','MmYBEqG0TXiFg39yXhkfO4umC7EyBETieGjHLUoL.jpeg',NULL);
+INSERT INTO `users` VALUES (1,'jes','fer','jesfer','jes@gmail.com','$2y$10$MrCsS6IyxaiFP9tZhAj6H.KoZXMfGIWzBSukCCuizu43ubMgSfZG2','2020-03-17 18:44:50','2020-03-17 18:44:50','810803453',NULL,NULL,NULL),(2,'a','b','c','d@gmail.com','$2y$10$VFAqqF.Y/whrfkWJYjrBXeVTdcM7E1PTcFDiSizQ5BosWrYeQXr4.','2020-03-17 21:49:14','2020-03-17 21:49:14',NULL,NULL,NULL,NULL),(3,'b','c','d','a@gmail.com','$2y$10$NXZm9RV6QdiEb8LBjX2mhuMN21CBKKvyR24B7CWxEzlOhM7rVTZ4W','2020-03-17 22:07:32','2020-03-17 22:07:32',NULL,NULL,NULL,NULL),(4,'c','d','s','r@gmail.com','$2y$10$kcOgDOZKD/fDPMos35GGl.KKRw.jSwvBvHpf7HBKdG3/J7bccm1/u','2020-03-17 22:21:59','2020-03-17 22:21:59',NULL,NULL,NULL,NULL),(5,'passas','passos','pass','pass@gmail.com','$2y$10$9r/JJ.5kvn4GkfZ8MgTvyuB8Z/j24gHdXixJxsb9FqaBSkaA9AOay','2020-03-17 22:37:19','2020-03-17 22:37:19','845','afds','magi2.PNG','outUV.jpg'),(6,'abs','abs','abs','abs@gmail.com','$2y$10$vExdCdKg1QobeyF8SfYt1u8ZqT9Dcd1FPUdojEEc1skh9VsEK79di','2020-03-18 16:09:36','2020-03-18 16:09:36','86523','sadfa',NULL,NULL),(11,'a1','a1','a1','a1@gmail.com','$2y$10$TWbD2HekjeU46JkhFZp8J.iHbfvaofQD37BZdKDEIN6jA32hFGolO','2020-03-18 18:41:41','2020-03-18 18:41:41','5814263','asf','idea stadio.png','yugi.PNG');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-20 12:48:11
+-- Dump completed on 2020-03-24 11:15:37

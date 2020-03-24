@@ -36,7 +36,7 @@ Route::get('/index',function () {
 
 Route::get('/perfil', 'userController@ind2')->name('usu');
 
-Route::post('/subir','userController@store')->name('subir');
+Route::post('/subir','userController@stimg')->name('subir');
 
 Route::get('/usuarios',function () {
     return view('usuarios');
@@ -84,7 +84,7 @@ Route::post('Cant', 'ContController@most');
 
 Route::post('Can2', 'ContController@most2');
 
-//Route::resource('Cont', 'ContController');
+Route::resource('Cont', 'ContController');
 
 Route::post('Uudp/{id}', 'userController@update');
 
@@ -108,7 +108,7 @@ Route::get('/editorProd',function () {
 });
 
 
-Route::post('shMo', 'mensajeController@shoM');
+Route::post('shMo', 'mensajeController@shoM')->name('SM');
 
 
 

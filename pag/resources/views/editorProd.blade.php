@@ -25,7 +25,7 @@
                                 </div>
                     @endif
 
-         <form name="log"  method="post" action="{{url('modA')}}">
+         <form name="log"  method="post" action="{{url('modA')}}" enctype="multipart/form-data">
                 
                 {{csrf_field()}}
                     <div class="row">
@@ -58,8 +58,25 @@
 
 
                         <div class="form-group">
-                        <label for="exampleFormControlFile1">poner imagen</label>
-                        <input type="file" class="form-control-file" id="fileUpload" name=" file">
+                        <?php $a = 1; ?>
+                        @foreach($imagen as $rI)
+                        {{$rI->url}}
+                      
+                     
+                        <input type="hidden" id="custId" name="file{{$a}}Id" value={{$rI->id}} >
+                        <label for="exampleFormControlFile1">poner imagen {{$a}}</label>
+                        <input type="file" class="form-control-file" id="fileUpload" name="file{{$a}}" value="{{$rI->url}}">
+                        <?php $a++; ?>
+                        
+                        @endforeach
+
+@for($i=$a; $i <= 3; $i++)
+                        <input type="hidden" id="custId" name="file{{$i+3}}Id" value={{$i}} > 
+                        <label for="exampleFormControlFile1">poner imagen {{$i}}</label> 
+                        <input type="file" class="form-control-file" id="fileUpload" name="file{{$i+3}}" >
+@endfor
+
+
                         </div>
 
 

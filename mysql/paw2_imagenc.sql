@@ -27,10 +27,8 @@ CREATE TABLE `imagenc` (
   `contenido` int(11) NOT NULL,
   `url` varchar(150) NOT NULL,
   PRIMARY KEY (`idimagenC`),
-  UNIQUE KEY `idimagenC_UNIQUE` (`idimagenC`),
-  KEY `contenido_idx` (`contenido`),
-  CONSTRAINT `contenido` FOREIGN KEY (`contenido`) REFERENCES `contenido` (`idcontenido`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `idimagenC_UNIQUE` (`idimagenC`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +37,7 @@ CREATE TABLE `imagenc` (
 
 LOCK TABLES `imagenc` WRITE;
 /*!40000 ALTER TABLE `imagenc` DISABLE KEYS */;
+INSERT INTO `imagenc` VALUES (2,1,'batNorm.png'),(3,7,'seal of oricalcos.PNG'),(4,1,'normp.png');
 /*!40000 ALTER TABLE `imagenc` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-20 12:48:13
+-- Dump completed on 2020-03-24 11:15:39
