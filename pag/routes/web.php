@@ -64,6 +64,12 @@ Route::get('/welcome', 'WelcomeController@index')->name('welcome');
 
 Route::get('/producto', 'ContController@index')->name('prd');
 
+Route::get('bus1', 'ContController@busca1');
+
+Route::get('bus2', 'ContController@busca2');
+
+Route::get('bus4', 'ContController@busca4');
+
 Route::post('shArch', 'ContController@archivos')->name('arch');
 
 Route::post('megusta', 'ContController@VotacionPositiva')->name('MP');

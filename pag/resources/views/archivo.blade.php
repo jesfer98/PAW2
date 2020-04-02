@@ -10,34 +10,53 @@
        
     <br>
 
-  <script>
-    $(document).ready(function(){
-        $("#m1").hover(function(){
-            $("#sho").attr("src", "img/rojo.jpg");
-            });
-        $("#m2").hover(function(){
-            $("#sho").attr("src", "img/azul.jpg");
-            });
-        $("#m3").hover(function(){
-            $("#sho").attr("src", "img/idea stadio.png");
-            });
-        
-    });
-
-</script>
+  
 
 
 
 
 @foreach($contenido as $cnt)
 
+  
+    
+  
+
+
+
+          <script>
+              $(document).ready(function(){
+        
+          @foreach($imagenes as $imgs)
+
+                  $("#m{{$imgs->idimagenC}}").hover(function(){
+                      $("#sho").attr("src", "images/{{$imgs->url}}");
+                      });
+
+          @endforeach
+
+              });
+
+          </script>
+
+
     <div id="esp1" style="padding: 50px;">
           <div class="container-fluid">
                 <br>
 
                 <div class="clearfix">
-                    <img id="sho" src="img/rojo.jpg" alt="..." height="600px" width="600px" class="float-left">
+                <?php $ant2 = 0; ?>
+                
+                @foreach($imagenes as $imgs)         
+                    @if($imgs->contenido<>$ant2)
 
+                        <img id="sho" src="images/{{$imgs->url}}" alt="..." height="600px" width="600px" class="float-left">
+                    
+                    @endif
+                    <?php $ant2 = $imgs->contenido ?>
+                
+                @endforeach
+                
+                
                     <p>            nombre:     {{$cnt->nombre}}</p> 
                     
                     <br>
@@ -52,11 +71,15 @@
 
           <div>
               <div class="col-md-6" >
-                  <img  id="m1"src="img/rojo.jpg" alt=""height="100px" width="100px">
+
+              @foreach($imagenes as $imgs)
+
+                  <img  id="m{{$imgs->idimagenC}}"src="images/{{$imgs->url}}" alt=""height="100px" width="100px">
               
-                  <img id="m2" src="img/azul.jpg" alt="" height="100px" width="100px">
+            
               
-                  <img id="m3" src="img/idea stadio.png" alt="" height="100px" width="100px">
+              @endforeach
+
               </div>
 
           </div>

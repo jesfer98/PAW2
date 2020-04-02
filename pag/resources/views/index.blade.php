@@ -22,13 +22,13 @@
         <!-- The slideshow -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-            <img src="img/rojo.jpg" alt="Los Angeles" width="1100" height="500">
+            <img src="img/modelado.jpg" alt="Los Angeles" width="1500" height="650" onclick="location.href='bus1'">
             </div>
             <div class="carousel-item">
-            <img src="img/rojo.jpg" alt="Chicago" width="1100" height="500">
+            <img src="img/animaciones.jpg" alt="Chicago" width="1500" height="650" onclick="location.href='bus2'">
             </div>
             <div class="carousel-item">
-            <img src="img/azul.jpg" alt="New York" width="1100" height="500">
+            <img src="img/otros.jpg" alt="New York" width="1500" height="650" onclick="location.href='bus4'">
             </div>
         </div>
         

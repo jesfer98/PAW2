@@ -23,7 +23,8 @@ class ContController extends Controller
         return view('producto');
     }
 
-    public function busca(Request $request){
+    public function busca(Request $request)
+    {
         
         if($request->get('search')==null){
         $contenido = DB::table('contenidos')
@@ -145,7 +146,7 @@ class ContController extends Controller
             ]);
 
             
-/////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
 
 
             $contenido = new Contenido([
@@ -457,15 +458,16 @@ class ContController extends Controller
      //return view('archivo');
     }
     public function VotacionPositiva(Request $request)
-    {       
+     {       
         
         DB::table('contenidos')->where('idcontenido', $request->get('idprd'))->increment('val_pos');
         
       return $this->archivos($request); 
           
      }
+     
      public function VotacionNegativa(Request $request)
-    {       
+     {       
         
         DB::table('contenidos')->where('idcontenido', $request->get('idprd'))->increment('val_neg');
         
@@ -513,5 +515,47 @@ class ContController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function busca1()
+    {
+        
+       
+            $contenido = DB::table('contenidos')
+            ->join('categoria', 'contenidos.categoria', '=', 'categoria.idcategoria')
+            ->leftJoin('imagenc', 'contenidos.idcontenido', '=', 'imagenc.contenido')
+            ->select('contenidos.nombre as nombre', 'contenidos.descripcion as descripcion','contenidos.idcontenido as id','categoria.nombreC as categoria','contenidos.val_pos','contenidos.val_neg','imagenc.url')
+            ->where([['estado', '1'],['idcategoria', '1']])
+            ->get();
+
+        return view('buscador', ['contenido' => $contenido]);
+    }
+
+    public function busca2()
+    {
+        
+       
+            $contenido = DB::table('contenidos')
+            ->join('categoria', 'contenidos.categoria', '=', 'categoria.idcategoria')
+            ->leftJoin('imagenc', 'contenidos.idcontenido', '=', 'imagenc.contenido')
+            ->select('contenidos.nombre as nombre', 'contenidos.descripcion as descripcion','contenidos.idcontenido as id','categoria.nombreC as categoria','contenidos.val_pos','contenidos.val_neg','imagenc.url')
+            ->where([['estado', '1'],['idcategoria', '2']])
+            ->get();
+
+        return view('buscador', ['contenido' => $contenido]);
+    }
+
+    public function busca4()
+    {
+        
+       
+            $contenido = DB::table('contenidos')
+            ->join('categoria', 'contenidos.categoria', '=', 'categoria.idcategoria')
+            ->leftJoin('imagenc', 'contenidos.idcontenido', '=', 'imagenc.contenido')
+            ->select('contenidos.nombre as nombre', 'contenidos.descripcion as descripcion','contenidos.idcontenido as id','categoria.nombreC as categoria','contenidos.val_pos','contenidos.val_neg','imagenc.url')
+            ->where([['estado', '1'],['idcategoria', '4']])
+            ->get();
+
+        return view('buscador', ['contenido' => $contenido]);
     }
 }
