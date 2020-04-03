@@ -41,7 +41,7 @@ class ContController extends Controller
             ->select('contenidos.nombre as nombre', 'contenidos.descripcion as descripcion','contenidos.idcontenido as id','categoria.nombreC as categoria','contenidos.val_pos','contenidos.val_neg','imagenc.url')
             ->where([['usuario', '<>', $request->get('custId')],['estado', '1'],['nombre', $request->get('search')]])
             ->orWhere([['usuario', '<>', $request->get('custId')],['estado', '1'],['descripcion', $request->get('search')]])
-            ->orWhere([['usuario', '<>', $request->get('custId')],['estado', '1'],['categoria.nombre', $request->get('search')]])
+            ->orWhere([['usuario', '<>', $request->get('custId')],['estado', '1'],['categoria.nombreC', $request->get('search')]])
             ->get();}
 
         return view('buscador', ['contenido' => $contenido]);
@@ -109,9 +109,11 @@ class ContController extends Controller
        $contenido = DB::table('contenidos')->where('idcontenido', $request->get('custId'))->select('idcontenido as id', 'nombre','categoria','descripcion')->get();
        //return view('visita', compact('contenido'));
 
-       $imagen = DB::table('imagenc')->where('contenido', $request->get('custId'))->select('idimagenC as id', 'url')->get();
+       $imagen = DB::table('imagenc')->where('contenido', $request->get('custId'))->select('idimagenc as id', 'url')->get();
 
-       return view('editorProd', ['contenido' => $contenido,'imagen'=>$imagen]);
+       $video = DB::table('videoc')->where('contenido', $request->get('custId'))->select('idvideoc as id', 'url')->get();
+
+       return view('editorProd', ['contenido' => $contenido,'imagen'=>$imagen,'video'=>$video]);
     }
 
     /**
@@ -218,7 +220,22 @@ class ContController extends Controller
                );
             }
 
-       
+            if($archivo=$request->file('urlV')){
+    
+                $nombre=$archivo->getClientOriginalName();
+                $archivo->move('images',$nombre);
+               
+
+                $chat = DB::table('contenidos')->select('idcontenido')
+                ->where([['nombre', '=',  $request->get('nombre')],['usuario', '=', $request->get('custId')]])
+                ->get();
+        
+
+
+             DB::table('videoc')->insert(
+               ['contenido' =>  $chat->get(0)->idcontenido, 'url' => $nombre]
+               );
+            }
 
            
 
@@ -384,6 +401,29 @@ class ContController extends Controller
                         
         }
 
+        if($archivo=$request->file('vid')){
+
+                      
+
+            $nombre=$archivo->getClientOriginalName();
+            $archivo->move('images',$nombre);
+        
+
+            
+            $contenido = DB::table('videoc')
+            ->where('idvideoc', $request->get('vidid'))
+            ->update(['url' => $nombre  ]);
+
+        
+    }   elseif($archivo2=$request->file('vid2')){
+        $nombre=$archivo2->getClientOriginalName();
+        $archivo2->move('images',$nombre);
+    
+        DB::table('videoc')->insert(
+            ['contenido' =>  $request->get('custId'), 'url' => $nombre]
+            );
+                    
+    }
 
            
        return redirect()->route('usu')->with('success','Data update');
@@ -446,7 +486,7 @@ class ContController extends Controller
         $imagenes = DB::table('imagenC')
         ->where('contenido', $request->get('idprd'))->get();
 
-        $videos = DB::table('videoC')
+        $videos = DB::table('videoc')
         ->where('contenido', $request->get('idprd'))->get();
 
         $comentarios=DB::table('comentario')

@@ -81,6 +81,31 @@
 
 
 
+                        <div class="form-group">
+                        <?php $b = 1; ?>
+                        @foreach($video as $rL)
+                        {{$rL->url}}
+                      
+                     
+                        <input type="hidden" id="custId" name="vidid" value={{$rL->id}} >
+                        <label for="exampleFormControlFile1">video {{$b}}</label>
+                        <input type="file" class="form-control-file" id="fileUpload" name="vid" value="{{$rL->url}}">
+                        <?php $b++; ?>
+                        
+                        @endforeach
+
+@for($i=$a; $i <= 1; $i++)
+                        <input type="hidden" id="custId" name="vidid2" value={{$i}} > 
+                        <label for="exampleFormControlFile1">video {{$i}}</label> 
+                        <input type="file" class="form-control-file" id="fileUpload" name="vid2" >
+@endfor
+
+
+                        </div>
+
+
+
+
                     <div class="input-group mb-3" style="padding-top:10px;">
                         <input type="text" id="URLV" name="urlV" class="form-control" placeholder="url video" aria-label="url video" aria-describedby="basic-addon1">
                     </div>

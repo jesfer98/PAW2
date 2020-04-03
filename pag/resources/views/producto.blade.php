@@ -66,10 +66,12 @@
                 </div>
 
 
+                <div class="form-group">
+                  <label for="exampleFormControlFile1">poner video</label>
+                  <input type="file" class="form-control-file" id="URLV" name="urlV">
+                </div>
 
-            <div class="input-group mb-3" style="padding-top:10px;">
-                <input type="text" id="URLV" name="urlV" class="form-control" placeholder="url video" aria-label="url video" aria-describedby="basic-addon1">
-            </div>
+          
 
 
 <div> 

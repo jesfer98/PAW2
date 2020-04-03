@@ -83,10 +83,20 @@
               </div>
 
           </div>
-        
+          @foreach($videos as $vid)
+              <video width="320" height="240" controls>
+                <source src="images/{{$vid->url}}" type="video/mp4">
+              
+                Your browser does not support the video tag.
+              </video> 
+              
+          @endforeach
+
 
     </div>
     
+
+
 
     
       @if (Route::has('login'))

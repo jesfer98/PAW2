@@ -335,7 +335,7 @@
 
 @foreach($contenidos as $row2)
   @if($row2->usuario ==Auth::user()->id)
-    @if($row2->id<>$ant)
+    @if($row2->idcontenido<>$ant)
     <br>
     <div class="a{{$row2->categoria}}" style="padding: 35px">
         <div class="row" id="a{{$row2->categoria}}">
