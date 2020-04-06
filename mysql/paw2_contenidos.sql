@@ -39,7 +39,7 @@ CREATE TABLE `contenidos` (
   KEY `est_idx` (`categoria`),
   CONSTRAINT `est` FOREIGN KEY (`categoria`) REFERENCES `categoria` (`idcategoria`),
   CONSTRAINT `ref` FOREIGN KEY (`usuario`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `contenidos` (
 
 LOCK TABLES `contenidos` WRITE;
 /*!40000 ALTER TABLE `contenidos` DISABLE KEYS */;
-INSERT INTO `contenidos` VALUES (1,'aaa',1,'perro',5,0,0,1,'2020-03-18 05:22:14','2020-03-18 05:22:14'),(2,'prueba',2,NULL,5,5,3,1,'2020-03-18 05:26:48','2020-03-18 05:26:48'),(3,'s',2,'aaaa',5,0,0,0,'2020-03-18 05:29:13','2020-03-18 05:29:13'),(5,'ef',1,NULL,5,0,0,0,'2020-03-18 05:32:41','2020-03-18 05:32:41'),(7,'prueba65',4,'con imagen',5,0,0,0,'2020-03-23 22:36:06','2020-03-23 22:36:06');
+INSERT INTO `contenidos` VALUES (1,'aaa',1,'perro',5,0,0,1,'2020-03-18 05:22:14','2020-03-18 05:22:14'),(2,'prueba',2,NULL,5,5,3,1,'2020-03-18 05:26:48','2020-03-18 05:26:48'),(3,'s',2,'aaaa',5,0,0,0,'2020-03-18 05:29:13','2020-03-18 05:29:13'),(5,'ef',1,NULL,5,0,0,0,'2020-03-18 05:32:41','2020-03-18 05:32:41'),(7,'prueba65',4,'con imagen',5,0,0,0,'2020-03-23 22:36:06','2020-03-23 22:36:06'),(9,'PRBV',2,'otra',5,0,0,1,'2020-04-02 17:02:27','2020-04-02 17:02:27');
 /*!40000 ALTER TABLE `contenidos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-24 11:15:41
+-- Dump completed on 2020-04-06 11:50:44

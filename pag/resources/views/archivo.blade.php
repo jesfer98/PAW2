@@ -25,12 +25,22 @@
 
           <script>
               $(document).ready(function(){
-        
+                $("#shV").hide();
           @foreach($imagenes as $imgs)
 
                   $("#m{{$imgs->idimagenC}}").hover(function(){
+                    $("#sho").show();
                       $("#sho").attr("src", "images/{{$imgs->url}}");
+                      $("#shV").hide();
                       });
+
+          @endforeach
+          @foreach($videos as $vid)
+
+                $("#vo").hover(function(){
+                  $("#shV").show();
+                  $("#sho").hide();
+                    });
 
           @endforeach
 
@@ -44,28 +54,41 @@
                 <br>
 
                 <div class="clearfix">
-                <?php $ant2 = 0; ?>
-                
-                @foreach($imagenes as $imgs)         
-                    @if($imgs->contenido<>$ant2)
+                    <div>
+                      <?php $ant2 = 0; ?>
+                      
+                                @foreach($imagenes as $imgs)         
+                                    @if($imgs->contenido<>$ant2)
 
-                        <img id="sho" src="images/{{$imgs->url}}" alt="..." height="600px" width="600px" class="float-left">
-                    
-                    @endif
-                    <?php $ant2 = $imgs->contenido ?>
-                
-                @endforeach
-                
-                
+                                        <img id="sho" src="images/{{$imgs->url}}" alt="..." height="600px" width="600px" class="float-left">
+                                    
+                                    @endif
+                                    <?php $ant2 = $imgs->contenido ?>
+                                
+                                @endforeach
+                      
+
+                      @foreach($videos as $vid)
+                            <video height="600px" width="800px" controls id="shV">
+                            <source src="images/{{$vid->url}}" type="video/mp4">
+                          
+                            Your browser does not support the video tag.
+                            </video> 
+                          
+                      @endforeach
+                    </div>
+              
                     <p>            nombre:     {{$cnt->nombre}}</p> 
                     
                     <br>
                     <p>            categotia:  {{$cnt->categoria}}</p>
                     <br>
                     <p>     descripcion: {{$cnt->descripcion}}</p>
-
+              
                 </div>
                       <br>
+
+           
           </div>
 
 
@@ -80,18 +103,19 @@
               
               @endforeach
 
+              @foreach($videos as $vid)
+          
+            
+                    <img  id="vo"src="img/rojo.jpg" alt=""height="100px" width="100px">
+              @endforeach
+
               </div>
+             
+       
+
 
           </div>
-          @foreach($videos as $vid)
-              <video width="320" height="240" controls>
-                <source src="images/{{$vid->url}}" type="video/mp4">
-              
-                Your browser does not support the video tag.
-              </video> 
-              
-          @endforeach
-
+        
 
     </div>
     

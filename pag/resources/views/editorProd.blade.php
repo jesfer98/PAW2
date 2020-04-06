@@ -94,7 +94,7 @@
                         
                         @endforeach
 
-@for($i=$a; $i <= 1; $i++)
+@for($i=$b; $i <= 1; $i++)
                         <input type="hidden" id="custId" name="vidid2" value={{$i}} > 
                         <label for="exampleFormControlFile1">video {{$i}}</label> 
                         <input type="file" class="form-control-file" id="fileUpload" name="vid2" >
@@ -106,10 +106,7 @@
 
 
 
-                    <div class="input-group mb-3" style="padding-top:10px;">
-                        <input type="text" id="URLV" name="urlV" class="form-control" placeholder="url video" aria-label="url video" aria-describedby="basic-addon1">
-                    </div>
-
+                   
                     <input type="hidden" id="custId" name="custId" value={{$rows->id}} >
  
 

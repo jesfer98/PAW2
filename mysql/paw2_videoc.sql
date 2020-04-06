@@ -27,10 +27,8 @@ CREATE TABLE `videoc` (
   `contenido` int(11) NOT NULL,
   `url` varchar(150) NOT NULL,
   PRIMARY KEY (`idvideoc`),
-  UNIQUE KEY `idvideoc_UNIQUE` (`idvideoc`),
-  KEY `contenido_idx` (`contenido`),
-  CONSTRAINT `contenido2` FOREIGN KEY (`contenido`) REFERENCES `contenido` (`idcontenido`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `idvideoc_UNIQUE` (`idvideoc`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +37,7 @@ CREATE TABLE `videoc` (
 
 LOCK TABLES `videoc` WRITE;
 /*!40000 ALTER TABLE `videoc` DISABLE KEYS */;
+INSERT INTO `videoc` VALUES (2,9,'Doom.mp4'),(3,1,'Freaks.mp4');
 /*!40000 ALTER TABLE `videoc` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-24 11:15:40
+-- Dump completed on 2020-04-06 11:50:43

@@ -28,7 +28,7 @@ CREATE TABLE `imagenc` (
   `url` varchar(150) NOT NULL,
   PRIMARY KEY (`idimagenC`),
   UNIQUE KEY `idimagenC_UNIQUE` (`idimagenC`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `imagenc` (
 
 LOCK TABLES `imagenc` WRITE;
 /*!40000 ALTER TABLE `imagenc` DISABLE KEYS */;
-INSERT INTO `imagenc` VALUES (2,1,'batNorm.png'),(3,7,'seal of oricalcos.PNG'),(4,1,'normp.png');
+INSERT INTO `imagenc` VALUES (2,1,'batNorm.png'),(3,7,'seal of oricalcos.PNG'),(4,1,'normp.png'),(5,8,'k2.png'),(6,8,'barricadatex.jpg'),(7,9,'fallo.png'),(8,9,'jimbo2.jpg');
 /*!40000 ALTER TABLE `imagenc` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-24 11:15:39
+-- Dump completed on 2020-04-06 11:50:42
